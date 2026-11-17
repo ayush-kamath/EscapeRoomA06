@@ -1,0 +1,2 @@
+# A06 - Escape Room
+- We will be importing [Principal Evil FREE – Abandoned Horror School Classroom](https://assetstore.unity.com/packages/3d/environments/principal-evil-free-abandoned-horror-school-classroom-422958) from Unity asset store for our scene setup.
