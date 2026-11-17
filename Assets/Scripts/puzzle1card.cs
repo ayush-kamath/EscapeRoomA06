@@ -5,7 +5,7 @@ public class Puzzle1Keycard : MonoBehaviour
 {
     public GameManager gameManager;
     public GameObject exitCard;
-    public GameObject bomb;
+    public GameObject puzzle2;
 
     private bool completed = false;
 
@@ -28,13 +28,22 @@ public class Puzzle1Keycard : MonoBehaviour
 
         completed = true;
 
-        gameManager.CompletePuzzle(0);
-
-        if (bomb != null)
+        if (exitCard.TryGetComponent<Renderer>(out var cardRenderer))
         {
-            bomb.SetActive(true);
+            var properties = new MaterialPropertyBlock();
+            cardRenderer.GetPropertyBlock(properties);
+            properties.SetColor("_GlowColor", Color.black);
+            cardRenderer.SetPropertyBlock(properties);
         }
 
-        Debug.Log("Puzzle 1 completed! Bomb activated!");
+        gameManager.CompletePuzzle(0);
+
+        if (puzzle2 != null)
+        {
+            puzzle2.SetActive(true);
+            Debug.Log("Puzzle 2 activated!");
+        }
+
+        Debug.Log("Puzzle 1 completed!");
     }
 }

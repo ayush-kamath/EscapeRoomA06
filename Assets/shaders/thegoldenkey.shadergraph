@@ -2,7 +2,11 @@
     "m_SGVersion": 3,
     "m_Type": "UnityEditor.ShaderGraph.GraphData",
     "m_ObjectId": "74625b0293914a9b818fb91d487b3eef",
-    "m_Properties": [],
+    "m_Properties": [
+        {
+            "m_Id": "cc9152e103b448bba6243d6c91a16720"
+        }
+    ],
     "m_Keywords": [],
     "m_Dropdowns": [],
     "m_CategoryData": [
@@ -505,7 +509,11 @@
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "61c87299f95742d2bda812edd4ba2576",
     "m_Name": "",
-    "m_ChildObjectList": []
+    "m_ChildObjectList": [
+        {
+            "m_Id": "cc9152e103b448bba6243d6c91a16720"
+        }
+    ]
 }
 
 {
@@ -1832,7 +1840,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "d250a04e64fb44cb9a89058880392f60",
     "m_Id": 0,
-    "m_DisplayName": "Out",
+    "m_DisplayName": "_GlowColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1853,13 +1861,13 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.ColorNode",
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "73014fa54d4c4624b95e593cc82a9fda",
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "Color",
+    "m_Name": "Property",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -1875,24 +1883,45 @@
             "m_Id": "d250a04e64fb44cb9a89058880392f60"
         }
     ],
-    "synonyms": [
-        "rgba"
-    ],
+    "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_Color": {
-        "color": {
-            "r": 2,
-            "g": 1.6313725490196078,
-            "b": 0.5333333333333333,
-            "a": 1
-        },
-        "mode": 1
+    "m_Property": {
+        "m_Id": "cc9152e103b448bba6243d6c91a16720"
     }
+}
+
+{
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
+    "m_ObjectId": "cc9152e103b448bba6243d6c91a16720",
+    "m_Guid": {
+        "m_GuidSerialized": "cd485382-9975-4a12-83d5-85cb62399ccd"
+    },
+    "m_Name": "_GlowColor",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "_GlowColor",
+    "m_DefaultReferenceName": "_GlowColor",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "r": 2,
+        "g": 1.6313725490196078,
+        "b": 0.5333333333333333,
+        "a": 1
+    },
+    "isMainColor": false,
+    "m_ColorMode": 1
 }
 
 {
