@@ -23913,7 +23913,7 @@ Transform:
   m_GameObject: {fileID: 749706738}
   serializedVersion: 2
   m_LocalRotation: {x: -0.979488, y: -0, z: -0, w: -0.20150271}
-  m_LocalPosition: {x: -1.699, y: 1.09, z: -0.224}
+  m_LocalPosition: {x: -1.699, y: 0.971, z: -0.085}
   m_LocalScale: {x: 0.018889, y: 0.018889, z: 0.015364502}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23977,7 +23977,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1723479629}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1767192433, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       insertIndex: -1
@@ -48190,12 +48193,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723479627}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.0975, y: 1.59061, z: -6.65358}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.59061, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1910263148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1723479630
 AudioSource:
@@ -54323,6 +54326,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1446485769574870111, guid: e8bf0777615a90344865896975e82a6d, type: 3}
   m_PrefabInstance: {fileID: 1908402439}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1910263148 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 757236248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1910341590
 GameObject:
   m_ObjectHideFlags: 0
@@ -58479,7 +58487,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -9.659936, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -62008,7 +62016,6 @@ SceneRoots:
   - {fileID: 1411907615}
   - {fileID: 757236248}
   - {fileID: 1813359604}
-  - {fileID: 1723479629}
   - {fileID: 1331120410}
   - {fileID: 1130195534}
   - {fileID: 1375737369}

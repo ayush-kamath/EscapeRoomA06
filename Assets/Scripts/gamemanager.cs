@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public float timerDuration = 600f;
     public float RemainingSeconds { get; private set; }
     public bool TimeUp => timerExpired;
+    public bool HasWon => exitUnlocked;
+    public int FinalScore { get; private set; }
 
     private bool[] puzzlesCompleted = new bool[4];
     private bool exitUnlocked = false;
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
             puzzlesCompleted[3])
         {
             exitUnlocked = true;
+            FinalScore = Mathf.CeilToInt(RemainingSeconds) * 10;
             if (exitDoor != null)
                 exitDoor.UnlockAndOpen();
             Debug.Log("All puzzles complete! Exit unlocked.");

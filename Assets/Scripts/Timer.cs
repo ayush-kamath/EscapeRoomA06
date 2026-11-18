@@ -21,6 +21,16 @@ public class Timer : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeRemaining / 60);
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
 
+        if (gameManager.HasWon)
+        {
+            timerText.text = string.Format(
+                "YOU ESCAPED!\nTime left: {0:00}:{1:00}\nScore: {2}",
+                minutes, seconds, gameManager.FinalScore
+            );
+            timerText.color = Color.green;
+            return;
+        }
+
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
