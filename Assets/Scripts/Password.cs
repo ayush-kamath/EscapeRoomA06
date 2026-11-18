@@ -9,6 +9,7 @@ public class Password : MonoBehaviour
     public TMP_Text[] passwordDisplay;
     public GameObject displayBoard;
     public GameObject puzzle4;
+    public AudioSource completionAudio;
 
     private XRSimpleInteractable[] buttons;
     private string entered = "";
@@ -45,9 +46,6 @@ public class Password : MonoBehaviour
         if (digit.Length != 1 || digit[0] < '0' || digit[0] > '9')
             return;
 
-        if (entered.Length == 4)
-            entered = "";
-
         entered += digit;
         UpdateDisplay();
 
@@ -55,10 +53,17 @@ public class Password : MonoBehaviour
         {
             completed = true;
             gameManager.CompletePuzzle(2);
+            if (completionAudio != null)
+                completionAudio.Play();
             if (puzzle4 != null)
                 puzzle4.SetActive(true);
             displayBoard.SetActive(false);
             gameObject.SetActive(false);
+        }
+        else if (entered.Length == 4)
+        {
+            entered = "";
+            UpdateDisplay();
         }
     }
 
