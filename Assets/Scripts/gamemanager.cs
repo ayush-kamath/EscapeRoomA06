@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public DoorController exitDoor;
-    [SerializeField] private Renderer scheduleRenderer;
+    public Renderer scheduleRenderer;
 
     private static readonly int GlowColorId = Shader.PropertyToID("_GlowColor");
 

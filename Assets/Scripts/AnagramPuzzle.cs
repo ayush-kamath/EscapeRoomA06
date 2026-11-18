@@ -6,8 +6,10 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class AnagramPuzzle : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private GameObject schedule;
+    public GameManager gameManager;
+    public GameObject schedule;
+    public GameObject password;
+    public GameObject passwordDisplay;
 
     private XRSimpleInteractable[] tiles;
     private XRSimpleInteractable firstTile;
@@ -20,12 +22,6 @@ public class AnagramPuzzle : MonoBehaviour
         tiles = GetComponentsInChildren<XRSimpleInteractable>();
         Array.Sort(tiles, (left, right) =>
             right.transform.localPosition.x.CompareTo(left.transform.localPosition.x));
-
-        if (tiles.Length != 7)
-        {
-            Debug.LogError("Anagram puzzle needs exactly seven letter tiles.", this);
-            return;
-        }
 
         foreach (var tile in tiles)
             tile.selectEntered.AddListener(OnTileSelected);
@@ -99,6 +95,8 @@ public class AnagramPuzzle : MonoBehaviour
             Debug.Log("Puzzle 2 completed!");
             if (schedule != null)
                 schedule.SetActive(true);
+            passwordDisplay.SetActive(true);
+            password.SetActive(true);
             gameObject.SetActive(false);
         }
     }

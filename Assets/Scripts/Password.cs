@@ -1,114 +1,70 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class AnagramPuzzle : MonoBehaviour
+public class Password : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private GameObject schedule;
+    public GameManager gameManager;
+    public TMP_Text[] passwordDisplay;
+    public GameObject displayBoard;
+    public GameObject puzzle4;
 
-    private XRSimpleInteractable[] tiles;
-    private XRSimpleInteractable firstTile;
-    private TMP_Text selectedText;
-    private Color selectedTextColor;
+    private XRSimpleInteractable[] buttons;
+    private string entered = "";
     private bool completed;
 
     private void OnEnable()
     {
-        tiles = GetComponentsInChildren<XRSimpleInteractable>();
-        Array.Sort(tiles, (left, right) =>
-            right.transform.localPosition.x.CompareTo(left.transform.localPosition.x));
-
-        if (tiles.Length != 7)
-        {
-            Debug.LogError("Anagram puzzle needs exactly seven letter tiles.", this);
-            return;
-        }
-
-        foreach (var tile in tiles)
-            tile.selectEntered.AddListener(OnTileSelected);
+        entered = "";
+        UpdateDisplay();
+        buttons = GetComponentsInChildren<XRSimpleInteractable>();
+        foreach (var button in buttons)
+            button.selectEntered.AddListener(OnNumberSelected);
     }
 
     private void OnDisable()
     {
-        ClearSelection();
-
-        if (tiles == null)
+        if (buttons == null)
             return;
 
-        foreach (var tile in tiles)
-            tile.selectEntered.RemoveListener(OnTileSelected);
+        foreach (var button in buttons)
+            button.selectEntered.RemoveListener(OnNumberSelected);
     }
 
-    private void OnTileSelected(SelectEnterEventArgs args)
+    private void OnNumberSelected(SelectEnterEventArgs args)
     {
-        if (completed || !(args.interactableObject is XRSimpleInteractable tile))
+        if (completed || !(args.interactableObject is XRSimpleInteractable button))
             return;
 
-        if (firstTile == null)
-        {
-            firstTile = tile;
-            selectedText = tile.GetComponentInChildren<TMP_Text>();
-            if (selectedText != null)
-            {
-                selectedTextColor = selectedText.color;
-                selectedText.color = Color.yellow;
-            }
-            return;
-        }
-
-        if (firstTile == tile)
-        {
-            ClearSelection();
-            return;
-        }
-
-        var firstIndex = Array.IndexOf(tiles, firstTile);
-        var secondIndex = Array.IndexOf(tiles, tile);
-        if (firstIndex < 0 || secondIndex < 0)
+        var label = button.GetComponentInChildren<TMP_Text>();
+        if (label == null)
             return;
 
-        var firstTransform = firstTile.transform;
-        var secondTransform = tile.transform;
-        var position = firstTransform.localPosition;
-        var rotation = firstTransform.localRotation;
-        firstTransform.localPosition = secondTransform.localPosition;
-        firstTransform.localRotation = secondTransform.localRotation;
-        secondTransform.localPosition = position;
-        secondTransform.localRotation = rotation;
+        var digit = label.text.Trim();
+        if (digit.Length != 1 || digit[0] < '0' || digit[0] > '9')
+            return;
 
-        tiles[firstIndex] = tile;
-        tiles[secondIndex] = firstTile;
-        ClearSelection();
+        if (entered.Length == 4)
+            entered = "";
 
-        var word = "";
-        foreach (var letterTile in tiles)
-        {
-            var label = letterTile.GetComponentInChildren<TMP_Text>();
-            if (label == null)
-                return;
-            word += label.text.Trim();
-        }
+        entered += digit;
+        UpdateDisplay();
 
-        if (string.Equals(word, "ENGLISH", StringComparison.OrdinalIgnoreCase))
+        if (entered == "1130")
         {
             completed = true;
-            gameManager.CompletePuzzle(1);
-            Debug.Log("Puzzle 2 completed!");
-            if (schedule != null)
-                schedule.SetActive(true);
+            gameManager.CompletePuzzle(2);
+            if (puzzle4 != null)
+                puzzle4.SetActive(true);
+            displayBoard.SetActive(false);
             gameObject.SetActive(false);
         }
     }
 
-    private void ClearSelection()
+    private void UpdateDisplay()
     {
-        if (selectedText != null)
-            selectedText.color = selectedTextColor;
-
-        selectedText = null;
-        firstTile = null;
+        for (var i = 0; i < passwordDisplay.Length; i++)
+            passwordDisplay[i].text = i < entered.Length ? entered[i].ToString() : "";
     }
 }
