@@ -56753,6 +56753,7 @@ MonoBehaviour:
   gameManager: {fileID: 1723479628}
   noteAudio: {fileID: 1147342129}
   statusText: {fileID: 1226751894}
+  backgroundMusic: {fileID: 1723479630}
   noteTiles:
   - {fileID: 2094204065}
   - {fileID: 621256658}
