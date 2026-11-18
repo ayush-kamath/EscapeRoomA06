@@ -52,12 +52,14 @@ public class Password : MonoBehaviour
         if (entered == "1130")
         {
             completed = true;
-            gameManager.CompletePuzzle(2);
+            if (gameManager != null)
+                gameManager.CompletePuzzle(2);
             if (completionAudio != null)
                 completionAudio.Play();
             if (puzzle4 != null)
                 puzzle4.SetActive(true);
-            displayBoard.SetActive(false);
+            if (displayBoard != null)
+                displayBoard.SetActive(false);
             gameObject.SetActive(false);
         }
         else if (entered.Length == 4)

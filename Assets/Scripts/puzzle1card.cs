@@ -36,7 +36,10 @@ public class Puzzle1Keycard : MonoBehaviour
             cardRenderer.SetPropertyBlock(properties);
         }
 
-        gameManager.CompletePuzzle(0);
+        if (gameManager != null)
+        {
+            gameManager.CompletePuzzle(0);
+        }
 
         if (puzzle2 != null)
         {

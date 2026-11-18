@@ -22,3 +22,7 @@
 /*.booproj
 /*.user
 /*.userprefs
+
+.DS_Store
+*.apk
+*_BackupThisFolder_ButDontShipItWithYourGame/

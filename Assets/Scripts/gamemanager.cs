@@ -8,16 +8,24 @@ public class GameManager : MonoBehaviour
 
     private static readonly int GlowColorId = Shader.PropertyToID("_GlowColor");
 
-    private const float TimerDuration = 30f;
-    public float RemainingSeconds { get; private set; } = TimerDuration;
+    // escape time in seconds, editable in the inspector
+    public float timerDuration = 600f;
+    public float RemainingSeconds { get; private set; }
+    public bool TimeUp => timerExpired;
 
     private bool[] puzzlesCompleted = new bool[4];
     private bool exitUnlocked = false;
     private bool timerExpired = false;
 
+    private void Awake()
+    {
+        RemainingSeconds = timerDuration;
+    }
+
     private void Update()
     {
-        if (timerExpired)
+        // clock stops once the door is open or time ran out
+        if (timerExpired || exitUnlocked)
             return;
 
         RemainingSeconds = Mathf.Max(0f, RemainingSeconds - Time.deltaTime);
@@ -31,6 +39,10 @@ public class GameManager : MonoBehaviour
     public void CompletePuzzle(int puzzleIndex)
     {
         if (puzzleIndex < 0 || puzzleIndex >= puzzlesCompleted.Length)
+            return;
+
+        // no progress after the timer ends
+        if (timerExpired)
             return;
 
         puzzlesCompleted[puzzleIndex] = true;
@@ -50,7 +62,8 @@ public class GameManager : MonoBehaviour
             puzzlesCompleted[3])
         {
             exitUnlocked = true;
-            exitDoor.UnlockAndOpen();
+            if (exitDoor != null)
+                exitDoor.UnlockAndOpen();
             Debug.Log("All puzzles complete! Exit unlocked.");
         }
     }

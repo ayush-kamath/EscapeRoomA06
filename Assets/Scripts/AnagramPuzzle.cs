@@ -91,12 +91,15 @@ public class AnagramPuzzle : MonoBehaviour
         if (string.Equals(word, "ENGLISH", StringComparison.OrdinalIgnoreCase))
         {
             completed = true;
-            gameManager.CompletePuzzle(1);
+            if (gameManager != null)
+                gameManager.CompletePuzzle(1);
             Debug.Log("Puzzle 2 completed!");
             if (schedule != null)
                 schedule.SetActive(true);
-            passwordDisplay.SetActive(true);
-            password.SetActive(true);
+            if (passwordDisplay != null)
+                passwordDisplay.SetActive(true);
+            if (password != null)
+                password.SetActive(true);
             gameObject.SetActive(false);
         }
     }
