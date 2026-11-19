@@ -5,6 +5,11 @@
 - Puzzle 3: Look for some hint for the password around the classroom. Pick up the glowing schedule and discover that the code is 11:30.
 - Puzzle 4: Listen to the music and solve the last puzzle! This will open the door and you can access your own copy of GTA VI!!
 
+**Videos:**
+- Gameplay video: https://drive.google.com/file/d/1VYL3bRAumpjI5K6oqLuZsFUMDm8XPIGK/view?usp=sharing
+- IRL video: https://drive.google.com/file/d/1Pkx2-4o5qCMOfxUjYklu4khWHyHQEP2B/view?usp=sharing
+- Advertisement and reflection video: https://drive.google.com/file/d/10RYq1zq38z_6BDke3pEKpBxzwoLDxlPN/view?usp=sharing
+
 **Controls:** (default bindings of the XR Interaction Toolkit starter rig):
 - Point the ray at a tile or button and squeeze the grip to select it.
 - Squeeze the grip to pick up the exit card, the schedule and the game card.
@@ -32,8 +37,3 @@
 - Configured settings for different devices.
 - Generated musical note tones.
 - Assisted with edge-case testing to identify potential issues.
-
-**Videos**
-- Gameplay video: https://drive.google.com/file/d/1VYL3bRAumpjI5K6oqLuZsFUMDm8XPIGK/view?usp=sharing
-- IRL video: https://drive.google.com/file/d/1Pkx2-4o5qCMOfxUjYklu4khWHyHQEP2B/view?usp=sharing
-- Advertisement and reflection video: https://drive.google.com/file/d/10RYq1zq38z_6BDke3pEKpBxzwoLDxlPN/view?usp=sharing
