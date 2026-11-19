@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour
 
         timerExpired = true;
         Debug.Log("Time's up!");
+
+        // show the time's up panel and the restart button
+        if (initialsEntry != null && initialsEntry.leaderboard != null)
+            initialsEntry.leaderboard.ShowResults(0, false, initialsEntry);
     }
 
     public void CompletePuzzle(int puzzleIndex)
