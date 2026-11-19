@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private bool[] puzzlesCompleted = new bool[4];
     private bool exitUnlocked = false;
     private bool timerExpired = false;
+    public InitialsEntry initialsEntry;
 
     private void Awake()
     {
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour
         {
             exitUnlocked = true;
             FinalScore = Mathf.CeilToInt(RemainingSeconds) * 10;
+            if (initialsEntry != null)
+                initialsEntry.BeginEntry(FinalScore);
             if (exitDoor != null)
                 exitDoor.UnlockAndOpen();
             Debug.Log("All puzzles complete! Exit unlocked.");

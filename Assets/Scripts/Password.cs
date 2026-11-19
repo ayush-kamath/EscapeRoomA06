@@ -54,8 +54,6 @@ public class Password : MonoBehaviour
             completed = true;
             if (gameManager != null)
                 gameManager.CompletePuzzle(2);
-            if (completionAudio != null)
-                completionAudio.Play();
             if (puzzle4 != null)
                 puzzle4.SetActive(true);
             if (displayBoard != null)

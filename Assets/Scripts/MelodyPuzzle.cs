@@ -11,9 +11,8 @@ public class MelodyPuzzle : MonoBehaviour
     public AudioSource noteAudio;
     public TMP_Text statusText;
 
-    // the end music keeps playing quietly while the puzzle is open
+    // End music starts only after the melody puzzle is solved.
     public AudioSource backgroundMusic;
-    public float musicVolumeDuringPuzzle = 0.15f;
 
     // note tiles from low to high
     public XRSimpleInteractable[] noteTiles;
@@ -41,7 +40,6 @@ public class MelodyPuzzle : MonoBehaviour
     private AudioClip wrongClip;
     private Renderer[] tileRenderers;
     private MaterialPropertyBlock tileProperties;
-    private float musicVolume = 1f;
     private int progress;
     private bool playingMelody;
     private bool completed;
@@ -75,12 +73,6 @@ public class MelodyPuzzle : MonoBehaviour
         if (completed)
             return;
 
-        if (backgroundMusic != null)
-        {
-            musicVolume = backgroundMusic.volume;
-            backgroundMusic.volume = musicVolumeDuringPuzzle;
-        }
-
         StartCoroutine(PlayMelody(1.5f));
     }
 
@@ -94,8 +86,6 @@ public class MelodyPuzzle : MonoBehaviour
         if (replayTile != null)
             replayTile.selectEntered.RemoveListener(OnReplaySelected);
 
-        if (!completed && backgroundMusic != null)
-            backgroundMusic.volume = musicVolume;
     }
 
     private void OnReplaySelected(SelectEnterEventArgs args)
@@ -143,7 +133,7 @@ public class MelodyPuzzle : MonoBehaviour
         completed = true;
         SetStatus("The door is open!");
         if (backgroundMusic != null)
-            backgroundMusic.volume = musicVolume;
+            backgroundMusic.Play();
         if (gameManager != null)
             gameManager.CompletePuzzle(3);
         Debug.Log("Puzzle 4 completed!");
