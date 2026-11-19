@@ -26,7 +26,9 @@ public class InitialsEntry : MonoBehaviour
         gameObject.SetActive(true);
         RefreshLetters();
 
-        promptText.text = $"Score: {score}\nEnter your initials";
+        promptText.text = $"Score: {score}";
+        promptText.alignment = TextAlignmentOptions.Center;
+        promptText.textWrappingMode = TextWrappingModes.NoWrap;
     }
 
     private void ChangeLetter(int index, int direction)
@@ -67,5 +69,6 @@ public class InitialsEntry : MonoBehaviour
 
         leaderboard.AddScore(new string(letters), pendingScore);
         gameObject.SetActive(false);
+        leaderboard.ShowRestartButton();
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class LocalLeaderboard : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class LocalLeaderboard : MonoBehaviour
     private const string SaveKey = "EscapeRoom.NamedScores";
     private const int MaxScores = 5;
     private string resultHeading = "";
+    private GameObject restartButton;
 
     [Serializable]
     public class Entry
@@ -60,54 +63,71 @@ public class LocalLeaderboard : MonoBehaviour
     public void ShowResults(int score, bool won, InitialsEntry initials)
     {
         bool enterName = won && Qualifies(score) && initials != null;
-        resultHeading = won ? $"YOU ESCAPED!  Score: {score}\n\n" : "TIME'S UP!\n\n";
+        resultHeading = won ? "" : "TIME'S UP!\n";
         if (leaderboardText != null)
         {
             var rect = leaderboardText.rectTransform;
-            rect.sizeDelta = new Vector2(2.4f, 2.4f);
+            rect.sizeDelta = new Vector2(2.6f, 2f);
             leaderboardText.margin = Vector4.zero;
-            leaderboardText.enableAutoSizing = false;
-            leaderboardText.fontSize = 2f;
-            leaderboardText.alignment = TextAlignmentOptions.TopLeft;
+            leaderboardText.textWrappingMode = TextWrappingModes.NoWrap;
+            leaderboardText.enableAutoSizing = true;
+            leaderboardText.fontSizeMin = 0.25f;
+            leaderboardText.fontSizeMax = 1.35f;
+            leaderboardText.fontSize = 1.35f;
+            leaderboardText.alignment = TextAlignmentOptions.Center;
             leaderboardText.color = Color.white;
             leaderboardText.gameObject.SetActive(true);
-            PlaceInFront(rect, enterName ? -0.8f : 0f);
+            PlaceInFront(rect, -0.23f, 0.1f);
         }
         RefreshDisplay();
         if (initials != null)
         {
+            foreach (TMP_Text label in initials.GetComponentsInChildren<TMP_Text>(true))
+                label.fontSize *= 0.7f;
             initials.gameObject.SetActive(false);
             if (enterName)
             {
-                PlaceInFront(initials.transform, 0.8f);
+                PlaceInFront(initials.transform, 0.23f, -0.08f);
                 initials.BeginEntry(score);
+            }
+            else if (won)
+            {
+                TMP_Text scoreText = Instantiate(initials.promptText);
+                scoreText.text = $"Score: {score}";
+                scoreText.alignment = TextAlignmentOptions.Center;
+                scoreText.textWrappingMode = TextWrappingModes.NoWrap;
+                PlaceInFront(scoreText.transform, 0.23f, 0.1f);
+            }
+
+            Transform submitButton = initials.transform.Find("Submit Button");
+            if (submitButton != null)
+            {
+                restartButton = Instantiate(submitButton.gameObject);
+                restartButton.name = "Restart Button";
+                restartButton.GetComponentInChildren<TMP_Text>().text = "RESTART";
+                PlaceInFront(restartButton.transform, -0.23f, -0.3f);
+                restartButton.GetComponent<XRSimpleInteractable>().selectEntered.AddListener(
+                    _ => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+                restartButton.SetActive(!enterName);
             }
         }
     }
 
-    // Place once at eye height, then leave the controls stationary for XR pointing.
-    private static void PlaceInFront(Transform panel, float horizontalOffset)
+    public void ShowRestartButton()
+    {
+        if (restartButton != null)
+            restartButton.SetActive(true);
+    }
+
+    // Keep the result controls in view as the XR camera moves.
+    private static void PlaceInFront(Transform panel, float horizontalOffset, float verticalOffset = 0f)
     {
         Camera view = Camera.main;
         if (view == null) return;
-        Vector3 forward = Vector3.ProjectOnPlane(view.transform.forward, Vector3.up).normalized;
-        if (forward.sqrMagnitude < 0.01f) forward = Vector3.forward;
-        Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-        Vector3 origin = view.transform.position;
-        origin.y = Mathf.Max(origin.y, 0.35f);
-        float panelScale = origin.y < 0.9f ? 0.25f : 0.65f;
-        float distance = 2f;
-        if (Physics.SphereCast(origin, 0.25f, forward, out RaycastHit hit, distance,
-            Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
-            distance = Mathf.Clamp(hit.distance - 0.15f, 0.4f, 2f);
-        float distanceScale = distance / 2f;
-        panel.SetParent(null, true);
-        Vector3 position = origin + forward * distance
-            + rotation * Vector3.right * horizontalOffset * distanceScale * (panelScale / 0.65f);
-        // The simulator can start with its head at ground level.
-        position.y = Mathf.Max(position.y, 0.35f);
-        panel.SetPositionAndRotation(position, rotation);
-        panel.localScale = Vector3.one * panelScale * distanceScale;
+        panel.SetParent(view.transform, false);
+        panel.localPosition = new Vector3(horizontalOffset, verticalOffset, 0.8f);
+        panel.localRotation = Quaternion.identity;
+        panel.localScale = Vector3.one * 0.3f;
     }
 
     public void AddScore(string initials, int score)
@@ -139,16 +159,15 @@ public class LocalLeaderboard : MonoBehaviour
             return;
 
         SaveData data = Load();
-        StringBuilder text = new StringBuilder(resultHeading + "TOP 5 ESCAPES\n\n");
+        StringBuilder text = new StringBuilder(resultHeading + "TOP 5 ESCAPES");
 
         if (data.entries.Count == 0)
-            text.Append("No scores yet!");
+            text.Append("\nNo scores yet!");
 
         for (int i = 0; i < data.entries.Count; i++)
         {
             Entry entry = data.entries[i];
-            text.AppendLine(
-                $"{i + 1}. {entry.initials} - {entry.score} points");
+            text.Append($"\n{i + 1}. {entry.initials}  {entry.score}");
         }
 
         leaderboardText.text = text.ToString();
