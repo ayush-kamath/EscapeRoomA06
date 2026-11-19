@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         RemainingSeconds = timerDuration;
+        if (initialsEntry != null)
+            initialsEntry.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -66,8 +68,8 @@ public class GameManager : MonoBehaviour
         {
             exitUnlocked = true;
             FinalScore = Mathf.CeilToInt(RemainingSeconds) * 10;
-            if (initialsEntry != null)
-                initialsEntry.BeginEntry(FinalScore);
+            if (initialsEntry != null && initialsEntry.leaderboard != null)
+                initialsEntry.leaderboard.ShowResults(FinalScore, true, initialsEntry);
             if (exitDoor != null)
                 exitDoor.UnlockAndOpen();
             Debug.Log("All puzzles complete! Exit unlocked.");
