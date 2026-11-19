@@ -30,14 +30,15 @@ Everything the player interacts with was added and set up by us on top of that r
 Requirements: Unity 6000.5.9f1 with Android Build Support, and a Meta Quest headset in developer mode.
 
 1. Clone the repository and open the folder in Unity Hub. The first import takes a few minutes.
-2. Open the scene `Assets/Escaperoom.unity`. It is the only scene in the build settings.
+2. Open the scene `Assets/Escaperoom.unity`. It is the only scene enabled in the build settings.
 3. To play on the headset: File > Build Profiles, switch to Android, connect the Quest and choose Build And Run.
 4. To try it without a headset: press Play in the editor. The scene has an XR Interaction Simulator that is only used in the editor and is left out of Quest builds.
 
-Controls (standard XR Interaction Toolkit rig):
-- Point the ray and pull the trigger to select tiles and buttons.
+Controls (default bindings of the XR Interaction Toolkit starter rig):
+- Point the ray at a tile or button and squeeze the grip to select it.
 - Squeeze the grip to pick up the exit card, the schedule and the game card.
-- Push the thumbstick forward and release to teleport.
+- Push the right thumbstick forward and release to teleport.
+- Use the left thumbstick to walk.
 
 The timer length is `Timer Duration` on the `Gamemanager` object, in seconds (600 by default).
 
