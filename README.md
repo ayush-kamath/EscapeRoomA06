@@ -32,3 +32,8 @@
 - Configured settings for different devices.
 - Generated musical note tones.
 - Assisted with edge-case testing to identify potential issues.
+
+**Videos**
+- Gameplay video: https://drive.google.com/file/d/1VYL3bRAumpjI5K6oqLuZsFUMDm8XPIGK/view?usp=sharing
+- IRL video: https://drive.google.com/file/d/1Pkx2-4o5qCMOfxUjYklu4khWHyHQEP2B/view?usp=sharing
+- Advertisement and reflection video: https://drive.google.com/file/d/10RYq1zq38z_6BDke3pEKpBxzwoLDxlPN/view?usp=sharing
