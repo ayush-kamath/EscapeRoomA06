@@ -11,3 +11,41 @@ Rubric Elements:
 2) We have a leaderboard displaying the 5 highest scores with an option to select your initials.
 3) Multiple Senses: Visual elements, victory music, musical matching in puzzle 4, vibration haptics when pressing puzzle buttons.
 4) Timer: A 10 minute timer. When it ends, the player is no longer able to open the door via puzzles, but is able to restart.
+
+## Environment: what came from the asset pack and what we built
+The classroom itself comes from the Principal Evil FREE asset pack: walls, floor, ceiling, windows, door, blackboard, desks, shelves and the other furniture and props.
+
+Everything the player interacts with was added and set up by us on top of that room:
+- Card reader, its trigger zone and label, and the exit card with our glow shader graph (`Assets/shaders/thegoldenkey.shadergraph`).
+- Spark particle system on the card reader.
+- Anagram tiles, the number keypad with its four digit display, and the note tiles for the melody puzzle, all placed on the blackboard.
+- The class schedule prop that gives the password hint, with the same glow shader.
+- Timer text, leaderboard, initials entry panel and restart button.
+- The game card prize outside the door.
+- The ground outside the classroom, and teleport areas on both the outside ground and the classroom floor.
+- A script on the pack's door so it swings open once all four puzzles are solved.
+- All game logic in `Assets/Scripts`.
+
+## Running the game
+Requirements: Unity 6000.5.9f1 with Android Build Support, and a Meta Quest headset in developer mode.
+
+1. Clone the repository and open the folder in Unity Hub. The first import takes a few minutes.
+2. Open the scene `Assets/Escaperoom.unity`. It is the only scene in the build settings.
+3. To play on the headset: File > Build Profiles, switch to Android, connect the Quest and choose Build And Run.
+4. To try it without a headset: press Play in the editor. The scene has an XR Interaction Simulator that is only used in the editor and is left out of Quest builds.
+
+Controls (standard XR Interaction Toolkit rig):
+- Point the ray and pull the trigger to select tiles and buttons.
+- Squeeze the grip to pick up the exit card, the schedule and the game card.
+- Push the thumbstick forward and release to teleport.
+
+The timer length is `Timer Duration` on the `Gamemanager` object, in seconds (600 by default).
+
+## Outside resources
+- Classroom environment: [Principal Evil FREE – Abandoned Horror School Classroom](https://assetstore.unity.com/packages/3d/environments/principal-evil-free-abandoned-horror-school-classroom-422958), Unity Asset Store.
+- Class schedule image (`Assets/Materials/Class Schedule Document in Pink Blue Simple Style.png`): made with a Canva template.
+- End music (`Assets/music/590-EndMusic.mp3`): source to be added.
+- Game card image (`Assets/Materials/game.jpg`): source to be added.
+- Outside ground texture (`Assets/outsideground_material.jpg`): source to be added.
+- Melody puzzle notes: generated in code, no audio files.
+- Engine and packages: Unity 6000.5.9f1, Universal Render Pipeline 17.5.0, XR Interaction Toolkit 3.5.1 (including its starter assets and simulator sample), OpenXR Plugin 1.19.0, Meta XR All-in-One SDK 209.0.0, Input System 1.20.0, TextMesh Pro with the Liberation Sans font.
